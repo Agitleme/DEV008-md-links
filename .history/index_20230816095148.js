@@ -15,7 +15,7 @@ export const mdLinks = (path, options) => {
 
 
 // Consumir la promesa 
-mdLinks ("./pruebas")
+mdLinks ("./oso")
 .then(links => {
 console.log('iniciando promesa', links)
 });
