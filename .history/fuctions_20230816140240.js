@@ -22,7 +22,6 @@ export function routeValid(route){
         console.log(chalk.bgBlue('ruta valida'))
         return true;
     } else {
-        console.log(chalk.bgYellow('ruta invalida'))
         return false;
     }
 };
