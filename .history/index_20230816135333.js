@@ -7,17 +7,15 @@ import { routeAbsolute, routeValid } from "./fuctions.js";
 
 export const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
- const routeA =  routeAbsolute (path);
- if (!routeValid(routeA)){
-  reject('ruta invalida')
- }
+ const routeA =  routeAbsolute (path)
+ resolve(routeA)
   })
 };
 
 
 
 // Consumir la promesa 
-mdLinks ("./README.md")
+mdLinks ("./pruebas")
 .then(links => {
 console.log('iniciando promesa', links)
 });
