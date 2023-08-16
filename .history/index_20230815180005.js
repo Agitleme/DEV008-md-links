@@ -1,21 +1,19 @@
+import { routeAbsolute } from "./fuctions";
 //Promesa
 //Callback resolve cuando la promesa se cumple 
 //Callback reject es cuando NO se cumple
 //cree promesa pero se consume en index
-
-import { routeAbsolute } from "./fuctions.js"; 
-
+ 
 export const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
- const routeA =  routeAbsolute (path)
- resolve(routeA)
+  const routeAbsolute =  routeAbsolute (path)
   })
 };
 
 
 
 // Consumir la promesa 
-mdLinks ("./pruebas")
+mdLinks(./pruebas)
 .then(links => {
-console.log('iniciando promesa', links)
-});
+console.log('iniciando promesa')
+})
