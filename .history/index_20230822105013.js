@@ -8,10 +8,10 @@ import { routeAbsolute, routeValid, isFiles, fileDirectory} from "./fuctions.js"
 export const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
  const routeA =  routeAbsolute (path);
- if (!routeValid(routeA)){
+ if (!routeValid(routeA))/*{
   reject('ruta invalida')
  }
- let 
+ let */
   })
 };
 

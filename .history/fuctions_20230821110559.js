@@ -27,7 +27,7 @@ export function routeAbsolute (route){
     return path.resolve(route)
     }
 };
-
+/*
 //verificar si es archivo o directorio 
 export function isFiles(route) {
     const state = fs.statSync(route);
@@ -42,13 +42,13 @@ export function isFiles(route) {
 //Del directorio obtiene los archivos
 export function fileDirectory(route) {
     let arrayFileDirectory = []
-    const fileD = fs.readdirSync(route, "utf-8") //trae los nombres de los archivos 
-    fileD.forEach((file) => {
-        const newRoute = path.join(route, file);
-        const stateNew = fs.statSync(newRoute); // propiedades 
-        if (stateNew.isFiles()){
+    const fileD = fs.readdirSync(route) //leer los archivos
+    FileSystem.forEach((file) => {
+        const newRoute = fs.statSync(newRoute);
+        is (statsNew.isFiles()){
             arrayFileDirectory.push(newRoute);
         }
+        
     });
 return arrayFileDirectory;
-}
+}*/

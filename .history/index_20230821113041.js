@@ -11,7 +11,6 @@ export const mdLinks = (path, options) => {
  if (!routeValid(routeA)){
   reject('ruta invalida')
  }
- let 
   })
 };
 
