@@ -49,6 +49,7 @@ export function fileDirectory(route) {
         if (stateNew.isFiles()){
             arrayFileDirectory.push(newRoute);
         }
+        
     });
 return arrayFileDirectory;
 }

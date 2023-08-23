@@ -3,7 +3,7 @@
 //Callback reject es cuando NO se cumple
 //cree promesa pero se consume en index
 
-import { routeAbsolute, routeValid, isFiles, fileDirectory} from "./fuctions.js"; 
+import { routeAbsolute, routeValid } from "./fuctions.js"; 
 
 export const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
@@ -11,7 +11,6 @@ export const mdLinks = (path, options) => {
  if (!routeValid(routeA)){
   reject('ruta invalida')
  }
- let 
   })
 };
 

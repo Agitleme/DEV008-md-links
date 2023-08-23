@@ -42,13 +42,13 @@ export function isFiles(route) {
 //Del directorio obtiene los archivos
 export function fileDirectory(route) {
     let arrayFileDirectory = []
-    const fileD = fs.readdirSync(route, "utf-8") //trae los nombres de los archivos 
+    const fileD = fs.readdirSync(route, 'utf-8') //trae los nombres de los archivos 
     fileD.forEach((file) => {
-        const newRoute = path.join(route, file);
-        const stateNew = fs.statSync(newRoute); // propiedades 
-        if (stateNew.isFiles()){
+        const newRoute = fs.statSync(newRoute);
+        is (statsNew.isFiles()){
             arrayFileDirectory.push(newRoute);
         }
+        
     });
 return arrayFileDirectory;
 }
