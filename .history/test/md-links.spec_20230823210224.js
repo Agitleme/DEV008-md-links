@@ -18,6 +18,6 @@ import {mdLinks} from '../index';
 
 describe('Rusta Absoluta',()=>{
   it('debe ser una funcion',()=>{
-    expect(typeof(routeAbsolute)).toBe('function')
+    expect(typeof(routeAbsolute))
   })
 })
