@@ -15,11 +15,6 @@
     "test": "jest --verbose --coverage"
   },
   "dependencies": {
-    "@babel/cli": "^7.22.10",
     "chalk": "^5.3.0"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.22.10",
-    "jest": "^29.6.3"
   }
 }
