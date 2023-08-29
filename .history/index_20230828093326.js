@@ -16,8 +16,7 @@ export const mdLinks = (path, options) => {
    arrayAllFile.push(routeA)
  } else {
    arrayAllFile = fileDirectory(routeA)
-   console.log(arrayAllFile)
-   }
+ }
 
 
 
@@ -30,7 +29,7 @@ export const mdLinks = (path, options) => {
 
 // Consumir la promesa 
 //links para función de links 
-mdLinks ("./pruebas")
+mdLinks ("./README.md")
 .then(links => {
 console.log('iniciando promesa', links)
 });

@@ -12,12 +12,11 @@ export const mdLinks = (path, options) => {
   reject('Route invalid')
  }
  let arrayAllFile = []; //contiene todos los archivos
- if (isFiles(routeA) === true) {
+ if (isFile(routeA) === true) {
    arrayAllFile.push(routeA)
  } else {
-   arrayAllFile = fileDirectory(routeA)
-   console.log(arrayAllFile)
-   }
+   arrayAllFile = filesInDirectory(routeA)
+ }
 
 
 
@@ -30,7 +29,7 @@ export const mdLinks = (path, options) => {
 
 // Consumir la promesa 
 //links para función de links 
-mdLinks ("./pruebas")
+mdLinks ("./README.md")
 .then(links => {
 console.log('iniciando promesa', links)
 });

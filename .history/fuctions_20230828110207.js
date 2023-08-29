@@ -32,8 +32,8 @@ export function routeAbsolute(route) {
 //verificar si es archivo o directorio
 export function isFiles(route) {
   const state = fs.statSync(route);
-  return state;
-  /* if (state.isFiles()) {
+  return state
+ /* if (state.isFiles()) {
     return true;
   } else if (state.isDirectory()) {
     return false;
@@ -42,20 +42,19 @@ export function isFiles(route) {
 
 //Del directorio obtiene los archivos
 export function fileDirectory(route) {
-  let arrayFile = [];
-  const fileD = fs.readdirSync(route, "utf-8");
-  fileD.forEach((file) => {
-    console.log(file, "ESTAS SON LAS CARPETAS");
-    const newRoute = path.join(route, file);
-    if (isFiles(newRoute)) {
-      arrayFile.push(newRoute); // estoy agregando al array vacio
-      console.log(newRoute, "Nueva Ruta");
-    } else {
-      fileDirectory(newRoute);
-    }
+  let arrayFileDirectory = [];
+  const fileD = fs.readdirSync(route, "utf-8"); 
+    fileD.forEach((file) => {
+    console.log(file,"ESTAS SON LAS CARPETAS")
+   if (isFiles)=== true
+   /* const newRoute = path.join(route, file);
+    //const stateNew = fs.statSync(newRoute); // propiedadesstateNew.
+   console.log(isFiles())
+      if (newRoute)) {
+      arrayFileDirectory.push(newRoute);
+    }*/
   });
-  console.log(arrayFile,"estos son los links")
-  return arrayFile;
+  return arrayFileDirectory;
 }
 
 //Función para filtrar los archivos .md
@@ -72,7 +71,7 @@ export function fileToStringArray(arrayFileDirectory) {
     const content = fs.readFileSync(pathFile, "utf-8");
     allFiles.push({ filePath: pathFile, content: content });
   });
-  return allFiles;
+  return allFiles
 }
 
 /*Función que obtiene todos los links 

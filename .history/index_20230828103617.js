@@ -16,8 +16,7 @@ export const mdLinks = (path, options) => {
    arrayAllFile.push(routeA)
  } else {
    arrayAllFile = fileDirectory(routeA)
-   console.log(arrayAllFile)
-   }
+ }
 
 
 

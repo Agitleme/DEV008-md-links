@@ -54,7 +54,6 @@ export function fileDirectory(route) {
       fileDirectory(newRoute);
     }
   });
-  console.log(arrayFile,"estos son los links")
   return arrayFile;
 }
 
