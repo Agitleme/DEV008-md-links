@@ -70,7 +70,7 @@ export function fileToStringArray(arrayFileDirectory) {
   const allFiles = [];
   arrayFileDirectory.forEach((pathFile) => {
     //se recorre cada uno de los archivos
-    const content = fs.readFileSync(pathFile, "utf-8");
+    const content = fs.readFile(pathFile, "utf-8");
     allFiles.push({ filePath: pathFile, content: content });
   });
   return allFiles;

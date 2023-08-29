@@ -59,13 +59,32 @@ export function fileDirectory(route) {
 }
 
 //Función para filtrar los archivos .md
- export function filterMD(arrayFile) {
+let arrayFile = [];
+console.log(arrayFile)
+const markdownFiles = filterMarkdownFiles(arrayFile);
+export function filterMarkdownFiles(arrayFile) {
+  return arrayFile.filter((arrayFile) => {
+    const fileExtension = arrayFile.split(".").pop();
+    console.log(fileExtension);
+    return fileExtension.toLowerCase() === "md";
+  });
+}
+
+console.log(markdownFiles, "Archivos MD"); // Salida
+
+/* Ejemplo de uso
+
+
+
+
+
+export function filterMD(arrayFile) {
   console.log(chalk.yellowBright("Archivos sin filtro"));
-   return arrayFile.filter((file) => path.extname(file) === ".md");
- }
+  return arrayFile
+  return filterMD(arrayFile).filter((file) => path.exthane(file) === ".md");
+*/
 
-
-//convierte un array de rutas de archivos en un array de objetos
+/convierte un arry de rutas de archivos en un array de objetos
 export function fileToStringArray(arrayFileDirectory) {
   const allFiles = [];
   arrayFileDirectory.forEach((pathFile) => {

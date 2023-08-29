@@ -64,8 +64,8 @@ export function fileDirectory(route) {
    return arrayFile.filter((file) => path.extname(file) === ".md");
  }
 
-
-//convierte un array de rutas de archivos en un array de objetos
+/*
+/convierte un arry de rutas de archivos en un array de objetos
 export function fileToStringArray(arrayFileDirectory) {
   const allFiles = [];
   arrayFileDirectory.forEach((pathFile) => {
@@ -74,7 +74,7 @@ export function fileToStringArray(arrayFileDirectory) {
     allFiles.push({ filePath: pathFile, content: content });
   });
   return allFiles;
-}
+}*/
 
 /*Función que obtiene todos los links 
 export function searchForLinks(stringArray){

@@ -18,7 +18,7 @@ export const mdLinks = (path, options) => {
    arrayAllFile = fileDirectory(routeA)
    console.log(arrayAllFile)
    const mdFiltro = filterMD(arrayAllFile)
-   console.log(mdFiltro)
+   
    }
 
 })

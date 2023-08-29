@@ -3,7 +3,7 @@
 //Callback reject es cuando NO se cumple
 //cree promesa pero se consume despues 
 
-import { routeAbsolute, routeValid, isFiles, fileDirectory, filterMD} from "./fuctions.js"; 
+import { routeAbsolute, routeValid, isFiles, fileDirectory} from "./fuctions.js"; 
 
 export const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
@@ -17,13 +17,8 @@ export const mdLinks = (path, options) => {
  } else {
    arrayAllFile = fileDirectory(routeA)
    console.log(arrayAllFile)
-   const mdFiltro = filterMD(arrayAllFile)
-   console.log(mdFiltro)
    }
-
 })
-
-
 };
 
 

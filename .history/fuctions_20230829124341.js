@@ -41,7 +41,7 @@ export function isFiles(route) {
 }
 
 //Del directorio obtiene los archivos
-export function fileDirectory(route) {
+/*export function fileDirectory(route) {
   let arrayFile = [];
   const fileD = fs.readdirSync(route, "utf-8");
   fileD.forEach((file) => {
@@ -59,13 +59,51 @@ export function fileDirectory(route) {
 }
 
 //Función para filtrar los archivos .md
+
+export function filterMarkdownFiles(arrayFile) {
+  let allFile = [];
+console.log(arrayFile)
+const markdownFiles = filterMarkdownFiles(allFile);
+  return arrayFile.filter((arrayFile) => {
+    const fileExtension = arrayFile.split(".").pop();
+    console.log(fileExtension);
+    return fileExtension.toLowerCase() === "md";
+    allFile.push(fileExtension);
+  });
+}
+
+console.log(markdownFiles, "Archivos MD"); // Salida*/
+
  export function filterMD(arrayFile) {
   console.log(chalk.yellowBright("Archivos sin filtro"));
-   return arrayFile.filter((file) => path.extname(file) === ".md");
+   return filterMD(arrayFile).filter((file) => path.exthane(file) === ".md");
  }
 
 
-//convierte un array de rutas de archivos en un array de objetos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+/convierte un arry de rutas de archivos en un array de objetos
 export function fileToStringArray(arrayFileDirectory) {
   const allFiles = [];
   arrayFileDirectory.forEach((pathFile) => {
@@ -74,7 +112,7 @@ export function fileToStringArray(arrayFileDirectory) {
     allFiles.push({ filePath: pathFile, content: content });
   });
   return allFiles;
-}
+}*/
 
 /*Función que obtiene todos los links 
 export function searchForLinks(stringArray){
