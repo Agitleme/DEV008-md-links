@@ -5,7 +5,7 @@
 
 import { routeAbsolute, routeValid, isFiles, fileDirectory, filterMD, fileToStringArray} from "./fuctions.js"; 
 
-export function mdLinks (path, options) {
+export fuction mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
  const routeA =  routeAbsolute (path);
 
@@ -23,15 +23,17 @@ export function mdLinks (path, options) {
 
 const mdFiltro = filterMD(arrayAllFile)
 if (mdFiltro.length === 0) reject ('Does not have MD files')
- //
+  resolve(mdFiltro)
    //console.log(mdFiltro)
    
-const contentMD = fileToStringArray(mdFiltro)
- resolve (contentMD)
-
-
+   
+   
  
+   
+
 })
+
+
 };
 
 
@@ -40,6 +42,6 @@ const contentMD = fileToStringArray(mdFiltro)
 //links para función de links 
 mdLinks ("./testFile")
 .then(links => {
-console.log('keeping promise', links)
+console.log('iniciando promesa', links)
 });
 

@@ -62,8 +62,6 @@ export function fileDirectory(route) {
 }
 
 //Función para filtrar los archivos .md
-//esta función filtra el array arrayFile y
-// devuelve un nuevo array que solo contiene las rutas de archivos con la extensión ".md"
 export function filterMD(arrayFile) {
   //console.log(chalk.yellowBright("files without filter"));
   return arrayFile.filter((file) => path.extname(file) === ".md");
@@ -71,16 +69,12 @@ export function filterMD(arrayFile) {
 
 //convierte un array de rutas de archivos en un array de objetos
 export function fileToStringArray(arrayFileDirectory) {
-  // Inicializa un array vacío para almacenar los objetos de archivos y contenido
   const allFiles = [];
-  // Itera a través de cada ruta de archivo en el array arrayFileDirectory
   arrayFileDirectory.forEach((pathFile) => {
-  // Lee el contenido del archivo en la ruta pathFile
+    //se recorre cada uno de los archivos
     const content = fs.readFileSync(pathFile, "utf-8");
-  // Agrega un objeto al array allFiles con la ruta del archivo y su contenido 
     allFiles.push({ filePath: pathFile, content: content });
   });
-  // Devuelve el array con objetos de archivos y contenido
   return allFiles;
 }
 

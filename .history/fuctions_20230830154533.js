@@ -75,12 +75,11 @@ export function fileToStringArray(arrayFileDirectory) {
   const allFiles = [];
   // Itera a través de cada ruta de archivo en el array arrayFileDirectory
   arrayFileDirectory.forEach((pathFile) => {
-  // Lee el contenido del archivo en la ruta pathFile
+    
+    //se recorre cada uno de los archivos
     const content = fs.readFileSync(pathFile, "utf-8");
-  // Agrega un objeto al array allFiles con la ruta del archivo y su contenido 
     allFiles.push({ filePath: pathFile, content: content });
   });
-  // Devuelve el array con objetos de archivos y contenido
   return allFiles;
 }
 
