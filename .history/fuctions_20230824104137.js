@@ -1,0 +1,66 @@
+import path from 'path';
+import chalk from 'chalk';
+import fs from 'fs';
+/* aqui van todas la funciones, validad una ruta, path a absuluto abiri con console log "node espacio y nombre del archivo"
+npm i path es una libreria de node que nos permite trabajar con rutas.
+Crear la función para validar ruta existe  con  File System fs.existSYNC(route).
+Retorna True or False. No se mete a directorios.
+npm i fs se instala y se importa.*/
+
+export function routeValid(route){
+    if(fs.existsSync(route)){
+        console.log(chalk.bgBlue('ruta valida')) 
+        return true;
+    } else {
+        console.log(chalk.bgYellow('ruta invalida'))
+        return false;
+    }
+};
+//funcion para validad una ruta a ruta absoluta.
+// Route es path, segundo route es parametroes otro route.
+//path.resolve se usa para pasar de una ruta relativa a una absoluta
+export function routeAbsolute (route){
+   if (path.isAbsolute(route)){
+    console.log(chalk.bgGreen('ruta absoluta', route))
+   } else { 
+    console.log(chalk.bgGrey('ruta absoluta', path.resolve(route)))
+    return path.resolve(route)
+    }
+};
+
+//verificar si es archivo o directorio 
+export function isFiles(route) {
+    const state = fs.statSync(route);
+    if(state.isFiles()){
+        return true;
+    }
+    else if (state.isDirectory()){
+        return false
+    }
+};
+
+//Del directorio obtiene los archivos
+export function fileDirectory(route) {
+    let arrayFileDirectory = []
+    const fileD = fs.readdirSync(route, "utf-8") //trae los nombres de los archivos 
+    fileD.forEach((file) => {
+        const newRoute = path.join(route, file);
+        const stateNew = fs.statSync(newRoute); // propiedades 
+        if (stateNew.isFiles()){
+            arrayFileDirectory.push(newRoute);
+        }
+    });
+return arrayFileDirectory;
+}
+
+//Función para filtrart los archivos .md
+export function filterMD(arrayFileDirectory){
+    console.log(chalk.yellowBright('Archivos sin filtro'))
+    return arrayFileDirectory.filter(file => path.exthane(file) === '.md');
+
+}
+
+//convierte un arry de rutas de archivos en un array de objetos 
+export function fileToStringArray(arrayFileDirectory){
+    const 
+}
