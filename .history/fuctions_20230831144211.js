@@ -11,7 +11,8 @@ npm i fs se instala y se importa.*/
 export function routeValid(route) {
   if (fs.existsSync(route)) {
     // Si el archivo o directorio existe en la ruta dada
-       return true;
+    // console.log(chalk.bgBlue("ruta valida"));
+    return true;
     //Devuelve true, lo que indica que la ruta es válida
   } else {
     // Si el archivo o directorio no existe en la ruta dada
@@ -52,11 +53,12 @@ export function fileDirectory(route) {
      arrayFile.push(newRoute); // Agrega la ruta al array si es un archivo
       } else {
       //spread se utiliza para descomponer los elementos de un arreglo y agregarlos uno por uno en otro arreglo.
-      arrayFile = [...arrayFile, ...fileDirectory(newRoute)]// Llamada recursiva si es un directorio
-      }
-
+      const arregloConcat = [...fileDirectory(newRoute), ... arrayFile]
+      arrayFile.push(newRoute)
+     // Llamada recursiva si es un directorio
+    }
   });
- 
+ // console.log(arrayFile, "these are the links");
   return arrayFile; // Devuelve el array con las rutas de archivos
 }
 
@@ -84,49 +86,32 @@ export function fileToStringArray(arrayFileDirectory) {
 }
 
 // Encuentra los enlaces en el texto de un archivo .md y en que linea del archivo se encuentra el link
-export function linkFinder(stringArray) {
-  const links = [];
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // Patrón regular que busca esto [texto](enlace)
-
-  stringArray.forEach((file) => {
-    const ArrayMatches = file.content.match(regex);
-    if (ArrayMatches) { // Aca estan todos los links encontrados [texto](enlace) en un array
-      ArrayMatches.forEach((linkMatch) => {//Recorremos cada uno de los links
-        const matchParts = linkMatch.match(/\[([^\]]+)\]\(([^)]+)\)/); //parte en dos el link para traer el contenido y la url
-        // if (matchParts) {
-        const text = matchParts[1]; // Texto entre corchetes
-        const link = matchParts[2]; // Enlace entre paréntesis
-        links.push({ file: file.filePath, href: link, text: text, }); // Pushea los objetos { filePath, text, link }
-        // }
-      });
+export function linkFinder(fileContent, file) {
+  // Definición de una expresión regular para encontrar enlaces en formato [texto](url)
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // expresión regular regex que busca patrones de enlaces Markdown.
+  const links = []; //Se crea una matriz vacía llamada links para almacenar los enlaces encontrados.
+  let match;
+  // Dividir el contenido del archivo en líneas individuales
+  const lines = fileContent.split("\n");
+  let lineNumber = 1;
+  // Iterar a través de cada línea del contenido del archivo
+  for (const line of lines) {
+    // Utilizar el método `exec` de la expresión regular para encontrar enlaces en la línea actual
+    while ((match = regex.exec(line))) {
+    // `match` contiene información sobre el enlace encontrado
+      const [ text, href] = match;
+      // Agregar la información del enlace encontrado al array `links`
+      links.push({ text, href, file, line: lineNumber });
     }
-  });
-  return links;
+    lineNumber++; //Después de revisar una línea completa, se incrementa el contador lineNumber para realizar un seguimiento de la línea actual.
+  }
+
+  if (links.length === 0) {
+    //Después de procesar todas las líneas, se verifica si se encontraron enlaces (links.length === 0).
+    //Si no se encontraron enlaces, la función arroja un error indicando que no se encontraron enlaces en el archivo.
+    throw new Error("No links found in the file.");
+  }
+// Devolver el array de enlaces encontrados
+console.log(links)
+  //return links;
 }
-
-/*
-
-export const axiosPeticion = (arryLinks) => {
-  const arrayPromises = arryLinks.map((item) => {
-    return axios
-      .get(item.href)
-      .then((response) => { // status 200
-        item.status = response.status
-        item.mensaje = response.statusText
-        return item
-      })
-      .catch((err) => {
-        if (err.response) {// 300, 400, 500
-          item.status = err.response.status;
-          item.mensaje = err.response.statusText
-        } else { //uNDEFINED
-          item.status = 404
-          item.mensaje = 'Not found'
-        }
-        return item
-      });
-  });
-  return Promise.all(arrayPromises)
-}
-
-*/

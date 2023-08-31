@@ -21,13 +21,18 @@ export function mdLinks (path, options) {
    arrayAllFile.push(routeA)
  } else {
    arrayAllFile = fileDirectory(routeA)
+   //console.log(arrayAllFile)
 }
 
 const mdFiltro = filterMD(arrayAllFile)
 if (mdFiltro.length === 0) reject ('Does not have MD files')
- const contentMD = fileToStringArray(mdFiltro)
+ //
+   //console.log(mdFiltro)
+   
+const contentMD = fileToStringArray(mdFiltro)
  resolve (contentMD)
 
+console.log(linkFinder)
 
  
 })

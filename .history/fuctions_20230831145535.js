@@ -11,7 +11,8 @@ npm i fs se instala y se importa.*/
 export function routeValid(route) {
   if (fs.existsSync(route)) {
     // Si el archivo o directorio existe en la ruta dada
-       return true;
+    // console.log(chalk.bgBlue("ruta valida"));
+    return true;
     //Devuelve true, lo que indica que la ruta es válida
   } else {
     // Si el archivo o directorio no existe en la ruta dada
@@ -49,14 +50,13 @@ export function fileDirectory(route) {
     // Crea la ruta completa al archivo o directorio
     const newRoute = path.join(route, file);
     if (isFiles(newRoute)) {
-     arrayFile.push(newRoute); // Agrega la ruta al array si es un archivo
-      } else {
+      arrayFile.push(newRoute); // Agrega la ruta al array si es un archivo
+    } else {
       //spread se utiliza para descomponer los elementos de un arreglo y agregarlos uno por uno en otro arreglo.
-      arrayFile = [...arrayFile, ...fileDirectory(newRoute)]// Llamada recursiva si es un directorio
-      }
-
+      const arregloConcat = [...fileDirectory(newRoute), ...arrayFile]; // Llamada recursiva si es un directorio
+    }
   });
- 
+  console.log(arrayFile, "these are the links");
   return arrayFile; // Devuelve el array con las rutas de archivos
 }
 
@@ -86,47 +86,18 @@ export function fileToStringArray(arrayFileDirectory) {
 // Encuentra los enlaces en el texto de un archivo .md y en que linea del archivo se encuentra el link
 export function linkFinder(stringArray) {
   const links = [];
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // Patrón regular que busca esto [texto](enlace)
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g; 
 
   stringArray.forEach((file) => {
     const ArrayMatches = file.content.match(regex);
-    if (ArrayMatches) { // Aca estan todos los links encontrados [texto](enlace) en un array
-      ArrayMatches.forEach((linkMatch) => {//Recorremos cada uno de los links
-        const matchParts = linkMatch.match(/\[([^\]]+)\]\(([^)]+)\)/); //parte en dos el link para traer el contenido y la url
-        // if (matchParts) {
-        const text = matchParts[1]; // Texto entre corchetes
-        const link = matchParts[2]; // Enlace entre paréntesis
-        links.push({ file: file.filePath, href: link, text: text, }); // Pushea los objetos { filePath, text, link }
-        // }
+    if (ArrayMatches) { 
+      ArrayMatches.forEach((linkMatch) => {
+        const matchParts = linkMatch.match(/\[([^\]]+)\]\(([^)]+)\)/); 
+        const text = matchParts[1]; 
+        const link = matchParts[2]; 
+        links.push({ file: file.filePath, href: link, text: text, }); 
       });
     }
   });
   return links;
 }
-
-/*
-
-export const axiosPeticion = (arryLinks) => {
-  const arrayPromises = arryLinks.map((item) => {
-    return axios
-      .get(item.href)
-      .then((response) => { // status 200
-        item.status = response.status
-        item.mensaje = response.statusText
-        return item
-      })
-      .catch((err) => {
-        if (err.response) {// 300, 400, 500
-          item.status = err.response.status;
-          item.mensaje = err.response.statusText
-        } else { //uNDEFINED
-          item.status = 404
-          item.mensaje = 'Not found'
-        }
-        return item
-      });
-  });
-  return Promise.all(arrayPromises)
-}
-
-*/
