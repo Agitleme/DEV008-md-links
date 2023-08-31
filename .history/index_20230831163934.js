@@ -28,6 +28,7 @@ if (mdFiltro.length === 0) reject ('Does not have MD files')
  const contentMD = fileToStringArray(mdFiltro)
  resolve (contentMD)
 
+console.log(linkFinder)
 
  
 })

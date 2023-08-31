@@ -11,7 +11,8 @@ npm i fs se instala y se importa.*/
 export function routeValid(route) {
   if (fs.existsSync(route)) {
     // Si el archivo o directorio existe en la ruta dada
-       return true;
+    // console.log(chalk.bgBlue("ruta valida"));
+    return true;
     //Devuelve true, lo que indica que la ruta es válida
   } else {
     // Si el archivo o directorio no existe en la ruta dada
@@ -84,7 +85,7 @@ export function fileToStringArray(arrayFileDirectory) {
 }
 
 // Encuentra los enlaces en el texto de un archivo .md y en que linea del archivo se encuentra el link
-export function linkFinder(stringArray) {
+export function searchLinks(stringArray) {
   const links = [];
   const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // Patrón regular que busca esto [texto](enlace)
 
