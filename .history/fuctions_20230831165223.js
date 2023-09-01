@@ -84,28 +84,24 @@ export function fileToStringArray(arrayFileDirectory) {
 
 // Encuentra los enlaces en el texto de un archivo .md y en que linea del archivo se encuentra el link
 export function linkFinder(stringObject) {
-  const links = []; // Aquí almacenaremos los enlaces encontrados.
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // Expresión regular para buscar enlaces en formato Markdown.
+  const links = [];
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
 
-  stringObject.forEach((file) => { // Iteramos a través de cada objeto de cadena en la entrada.
-    const matches = file.content.match(regex); // Buscamos todas las coincidencias de enlaces en el contenido del archivo.
-
-    if (matches) { // Si se encontraron coincidencias de enlaces en el archivo.
-      matches.forEach((linkMatch) => { // Iteramos a través de cada coincidencia de enlace encontrada.
-        const matchParts = linkMatch.match(/\[([^\]]+)\]\(([^)]+)\)/);
-        // La expresión regular anterior busca el texto y la URL dentro de una coincidencia de enlace.
-        const text = matchParts[1]; // Capturamos el texto del enlace.
-        const link = matchParts[2]; // Capturamos la URL del enlace.
-
-        links.push({ file: file.filePath, href: link, text: text });
-        // Agregamos un objeto con la información del enlace encontrado (archivo, URL y texto) al arreglo "links".
+  stringObject.forEach((file) => {
+    const matches = file.content.match(regex);
+    if (matches) {
+      matches.forEach((linkMatch) => {
+        const matchParts = linkMatch.match(/\[([^\]]+)\]\(([^)]+)\)/); //parte en dos el link para traer el contenido y la url
+        // if (matchParts) {
+        const text = matchParts[1]; // Texto entre corchetes
+        const link = matchParts[2]; // Enlace entre paréntesis
+        links.push({ file: file.filePath, href: link, text: text }); // Pushea los objetos { filePath, text, link }
+        // }
       });
     }
   });
-
-  return links; // Devolvemos el arreglo de enlaces encontrados.
+  return links;
 }
-
 
 /*
 
