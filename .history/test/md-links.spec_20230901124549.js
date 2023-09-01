@@ -33,15 +33,20 @@ describe('routeValid', () => {
 // routeAbsolute
 //Si una ruta absoluta proporcionada como entrada devuelve la misma ruta.
 describe('ruta absoluta', () => {
-  const route = 'C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile\\file1.md';
-  expect(routeAbsolute(route)).toBe(route);
+  const ruta = 'C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile\\file1.md';
+  expect(routeAbsolute(path)).toBe(path);
 });
 
-//Si una ruta relativa proporcionada como entrada se convierte correctamente en 
+/*Si una ruta relativa proporcionada como entrada se convierte correctamente en 
 //una ruta absoluta utilizando path.resolve.
 describe('ruta relativa convertida en absoluta', () => {
-  const rutaRelativa = '../README.md';
+  const rutaRelativa = 'C:\Users\apaom\OneDrive\Escritorio\MD Links\DEV008-md-links\testFile';
   const rutaAbsoluta = path.resolve(rutaRelativa);
   expect(routeAbsolute(rutaRelativa)).toBe(rutaAbsoluta);
 });
 
+//Si una ruta absoluta ya convertida se devuelve correctamente sin cambios.
+test('ruta absoluta ya convertida', () => {
+  const rutaAbsoluta = 'C:\Users\apaom\OneDrive\Escritorio\MD Links\DEV008-md-links\testFile';
+  expect(routeAbsolute(rutaAbsoluta)).toBe(rutaAbsoluta);
+});*/

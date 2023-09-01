@@ -45,3 +45,8 @@ describe('ruta relativa convertida en absoluta', () => {
   expect(routeAbsolute(rutaRelativa)).toBe(rutaAbsoluta);
 });
 
+//Si una ruta absoluta ya convertida se devuelve correctamente sin cambios.
+test('ruta absoluta ya convertida', () => {
+  const rutaAbsoluta = 'C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile';
+  expect(routeAbsolute(rutaAbsoluta)).toBe(rutaAbsoluta);
+});
