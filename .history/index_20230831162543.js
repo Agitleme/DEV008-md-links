@@ -21,15 +21,15 @@ export function mdLinks (path, options) {
    arrayAllFile.push(routeA)
  } else {
    arrayAllFile = fileDirectory(routeA)
+   //console.log(arrayAllFile)
 }
 
 const mdFiltro = filterMD(arrayAllFile)
 if (mdFiltro.length === 0) reject ('Does not have MD files')
- let contentMD = fileToStringArray(mdFiltro)
+ const contentMD = fileToStringArray(mdFiltro)
  resolve (contentMD)
 
- const theSameLinks = linkFinder(contentMD)
- console.log(theSameLinks)
+console.log(linkFinder)
 
  
 })

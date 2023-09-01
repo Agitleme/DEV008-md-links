@@ -11,6 +11,7 @@ npm i fs se instala y se importa.*/
 export function routeValid(route) {
   if (fs.existsSync(route)) {
     // Si el archivo o directorio existe en la ruta dada
+    // console.log(chalk.bgBlue("ruta valida"));
     return true;
     //Devuelve true, lo que indica que la ruta es válida
   } else {
@@ -49,13 +50,14 @@ export function fileDirectory(route) {
     // Crea la ruta completa al archivo o directorio
     const newRoute = path.join(route, file);
     if (isFiles(newRoute)) {
-      arrayFile.push(newRoute); // Agrega la ruta al array si es un archivo
-    } else {
+     arrayFile.push(newRoute); // Agrega la ruta al array si es un archivo
+      } else {
       //spread se utiliza para descomponer los elementos de un arreglo y agregarlos uno por uno en otro arreglo.
-      arrayFile = [...arrayFile, ...fileDirectory(newRoute)]; // Llamada recursiva si es un directorio
-    }
-  });
+      arrayFile = [...arrayFile, ...fileDirectory(newRoute)]// Llamada recursiva si es un directorio
+      }
 
+  });
+ 
   return arrayFile; // Devuelve el array con las rutas de archivos
 }
 
@@ -83,29 +85,25 @@ export function fileToStringArray(arrayFileDirectory) {
 }
 
 // Encuentra los enlaces en el texto de un archivo .md y en que linea del archivo se encuentra el link
-export function linkFinder(stringObject) {
-  const links = []; // Aquí almacenaremos los enlaces encontrados.
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // Expresión regular para buscar enlaces en formato Markdown.
+export function searchLinks(stringArray) {
+  const links = [];
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // Patrón regular que busca esto [texto](enlace)
 
-  stringObject.forEach((file) => { // Iteramos a través de cada objeto de cadena en la entrada.
-    const matches = file.content.match(regex); // Buscamos todas las coincidencias de enlaces en el contenido del archivo.
-
-    if (matches) { // Si se encontraron coincidencias de enlaces en el archivo.
-      matches.forEach((linkMatch) => { // Iteramos a través de cada coincidencia de enlace encontrada.
-        const matchParts = linkMatch.match(/\[([^\]]+)\]\(([^)]+)\)/);
-        // La expresión regular anterior busca el texto y la URL dentro de una coincidencia de enlace.
-        const text = matchParts[1]; // Capturamos el texto del enlace.
-        const link = matchParts[2]; // Capturamos la URL del enlace.
-
-        links.push({ file: file.filePath, href: link, text: text });
-        // Agregamos un objeto con la información del enlace encontrado (archivo, URL y texto) al arreglo "links".
+  stringArray.forEach((file) => {
+    const ArrayMatches = file.content.match(regex);
+    if (ArrayMatches) { // Aca estan todos los links encontrados [texto](enlace) en un array
+      ArrayMatches.forEach((linkMatch) => {//Recorremos cada uno de los links
+        const matchParts = linkMatch.match(/\[([^\]]+)\]\(([^)]+)\)/); //parte en dos el link para traer el contenido y la url
+        // if (matchParts) {
+        const text = matchParts[1]; // Texto entre corchetes
+        const link = matchParts[2]; // Enlace entre paréntesis
+        links.push({ file: file.filePath, href: link, text: text, }); // Pushea los objetos { filePath, text, link }
+        // }
       });
     }
   });
-
-  return links; // Devolvemos el arreglo de enlaces encontrados.
+  return links;
 }
-
 
 /*
 

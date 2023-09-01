@@ -1,0 +1,14 @@
+Markdown es un lenguaje de marcado ligero que se utiliza para formatear y estructurar el texto de una manera sencilla y fácil de leer. Fue creado por John Gruber en 2004 con el objetivo de permitir a las personas escribir contenido en formato de texto plano que pueda ser convertido fácilmente a HTML u otros formatos de presentación.
+El Markdown utiliza una sintaxis simple y legible que incluye caracteres especiales y convenciones de formato para indicar cómo se debe renderizar el texto. Algunos ejemplos de formato que se pueden lograr con Markdown incluyen:
+Encabezados: Utiliza almohadillas (#) para indicar niveles de encabezados. Por ejemplo, un solo # se utiliza para encabezado de primer nivel, ## para el segundo nivel, y así sucesivamente.
+Listas: Puedes crear listas ordenadas y no ordenadas utilizando números o guiones.
+Énfasis: Texto en cursiva se logra rodeándolo con asteriscos (*) o guiones bajos (_), 
+mientras que el texto en negrita se logra rodeándolo con dos asteriscos (**) o dos guiones bajos (__).
+Enlaces: Los enlaces se crean utilizando el formato [Texto del enlace](URL).
+Imágenes: Las imágenes se insertan utilizando el formato ![Texto alternativo](URL de la imagen).
+Citas: Las citas se pueden crear utilizando el carácter mayor que (>) al principio de la línea.
+Bloques de código: Los bloques de código se pueden crear utilizando tabulaciones o cuatro espacios al principio de la línea.
+Tablas: Las tablas se crean utilizando barras verticales (|) para separar las celdas y guiones (-) para indicar los encabezados.
+Una de las ventajas del Markdown es su simplicidad y facilidad de uso. Puedes escribir en Markdown 
+en cualquier editor de texto y luego convertirlo a HTML u otros formatos usando herramientas específicas. 
+Muchas plataformas de blogging, sistemas de gestión de contenido y sitios web admiten Markdown para la creación de contenido.

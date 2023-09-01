@@ -15,21 +15,25 @@ export function mdLinks (path, options) {
   reject('Route invalid')
  }
 //Dependiendo de si la ruta representa un archivo o un directorio, 
-//se crea un arreglo llamado arrayAllFile que contendrá rutas de archivos.
+//se crea un arreglo llamado arrayAllFile que contendrá 
+//rutas de archivos.
  let arrayAllFile = []; //contiene todos los archivos
  if (isFiles(routeA) === true) {
    arrayAllFile.push(routeA)
  } else {
    arrayAllFile = fileDirectory(routeA)
+   //console.log(arrayAllFile)
 }
 
-const mdFiltro = filterMD(arrayAllFile)
-if (mdFiltro.length === 0) reject ('Does not have MD files')
- let contentMD = fileToStringArray(mdFiltro)
- resolve (contentMD)
 
- const theSameLinks = linkFinder(contentMD)
- console.log(theSameLinks)
+let mdFiltro = filterMD(arrayAllFile)
+
+    if (mdFiltro.length === 0) reject('Does not have MD files')
+
+    let fileString = fileToStringArray(mdFiltro);
+
+
+    const linkKs = searchLinks(linkFinder)
 
  
 })

@@ -11,6 +11,7 @@ npm i fs se instala y se importa.*/
 export function routeValid(route) {
   if (fs.existsSync(route)) {
     // Si el archivo o directorio existe en la ruta dada
+    // console.log(chalk.bgBlue("ruta valida"));
     return true;
     //Devuelve true, lo que indica que la ruta es válida
   } else {
@@ -38,7 +39,7 @@ export function isFiles(route) {
   // Obtiene el estado (metadatos) del archivo o directorio en la ruta
   const state = fs.statSync(route);
   // Devuelve el objeto de estado (metadatos) obtenido
-  return state.isFile();
+  return state;
 }
 
 //Del directorio obtiene los archivos
@@ -46,22 +47,21 @@ export function fileDirectory(route) {
   let arrayFile = []; // Se inicializa un array vacío para almacenar las rutas de archivos encontrados
   const fileD = fs.readdirSync(route, "utf-8"); // Lee los contenidos del directorio en la ruta dada
   fileD.forEach((file) => {
+    //console.log(file, "THESE ARE THE FOLDERS");
     // Crea la ruta completa al archivo o directorio
     const newRoute = path.join(route, file);
     if (isFiles(newRoute)) {
       arrayFile.push(newRoute); // Agrega la ruta al array si es un archivo
+      //console.log(newRoute, "Route New");
     } else {
-      //spread se utiliza para descomponer los elementos de un arreglo y agregarlos uno por uno en otro arreglo.
-      arrayFile = [...arrayFile, ...fileDirectory(newRoute)]; // Llamada recursiva si es un directorio
+      fileDirectory(newRoute);
     }
   });
-
-  return arrayFile; // Devuelve el array con las rutas de archivos
+  // console.log(arrayFile, "these are the links");
+  return arrayFile;
 }
 
 //Función para filtrar los archivos .md
-//esta función filtra el array arrayFile y
-// devuelve un nuevo array que solo contiene las rutas de archivos con la extensión ".md"
 export function filterMD(arrayFile) {
   //console.log(chalk.yellowBright("files without filter"));
   return arrayFile.filter((file) => path.extname(file) === ".md");
@@ -69,67 +69,45 @@ export function filterMD(arrayFile) {
 
 //convierte un array de rutas de archivos en un array de objetos
 export function fileToStringArray(arrayFileDirectory) {
-  // Inicializa un array vacío para almacenar los objetos de archivos y contenido
   const allFiles = [];
-  // Itera a través de cada ruta de archivo en el array arrayFileDirectory
   arrayFileDirectory.forEach((pathFile) => {
-    // Lee el contenido del archivo en la ruta pathFile
+    //se recorre cada uno de los archivos
     const content = fs.readFileSync(pathFile, "utf-8");
-    // Agrega un objeto al array allFiles con la ruta del archivo y su contenido
     allFiles.push({ filePath: pathFile, content: content });
   });
-  // Devuelve el array con objetos de archivos y contenido
   return allFiles;
 }
 
 // Encuentra los enlaces en el texto de un archivo .md y en que linea del archivo se encuentra el link
-export function linkFinder(stringObject) {
-  const links = []; // Aquí almacenaremos los enlaces encontrados.
-  const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // Expresión regular para buscar enlaces en formato Markdown.
-
-  stringObject.forEach((file) => { // Iteramos a través de cada objeto de cadena en la entrada.
-    const matches = file.content.match(regex); // Buscamos todas las coincidencias de enlaces en el contenido del archivo.
-
-    if (matches) { // Si se encontraron coincidencias de enlaces en el archivo.
-      matches.forEach((linkMatch) => { // Iteramos a través de cada coincidencia de enlace encontrada.
-        const matchParts = linkMatch.match(/\[([^\]]+)\]\(([^)]+)\)/);
-        // La expresión regular anterior busca el texto y la URL dentro de una coincidencia de enlace.
-        const text = matchParts[1]; // Capturamos el texto del enlace.
-        const link = matchParts[2]; // Capturamos la URL del enlace.
-
-        links.push({ file: file.filePath, href: link, text: text });
-        // Agregamos un objeto con la información del enlace encontrado (archivo, URL y texto) al arreglo "links".
-      });
+export function linkFinder(fileContent, file) {
+  //fileContent: El contenido del archivo en el que deseas buscar enlaces. Se espera que este contenido sea una cadena de texto.
+  //file: El nombre del archivo en el que se están buscando los enlaces. Esto se utiliza para asociar los enlaces encontrados con un archivo específico.
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // expresión regular regex que busca patrones de enlaces Markdown.
+  //Los patrones de enlaces Markdown tienen la forma [texto](enlace) donde texto es el texto del enlace y enlace es la URL de destino del enlace.
+  const links = []; //Se crea una matriz vacía llamada links para almacenar los enlaces encontrados.
+  let match;
+  /* El contenido del archivo se divide en líneas utilizando el carácter de salto de línea (\n).
+  Se establece un contador de número de línea (lineNumber) para realizar un seguimiento de en qué línea se encuentra el enlace.*/
+  const lines = fileContent.split("\n");
+  let lineNumber = 1;
+  /*Se utiliza un bucle for...of para iterar a través de cada línea del contenido del archivo.
+En cada línea, se utiliza un bucle while junto con la función exec de la expresión regular para buscar enlaces en esa línea.
+Si se encuentra un enlace, se extrae el texto y el href del enlace mediante la coincidencia (match) y se agrega un objeto que 
+representa el enlace a la matriz links. 
+El objeto contiene el texto, el enlace, el nombre del archivo y el número de línea.*/
+  for (const line of lines) {
+    while ((match = regex.exec(line))) {
+      const [, text, href] = match;
+      links.push({ text, href, file, line: lineNumber });
     }
-  });
+    lineNumber++; //Después de revisar una línea completa, se incrementa el contador lineNumber para realizar un seguimiento de la línea actual.
+  }
 
-  return links; // Devolvemos el arreglo de enlaces encontrados.
+  if (links.length === 0) {
+    //Después de procesar todas las líneas, se verifica si se encontraron enlaces (links.length === 0).
+    //Si no se encontraron enlaces, la función arroja un error indicando que no se encontraron enlaces en el archivo.
+    throw new Error("No links found in the file.");
+  }
+
+  return links;
 }
-
-
-/*
-
-export const axiosPeticion = (arryLinks) => {
-  const arrayPromises = arryLinks.map((item) => {
-    return axios
-      .get(item.href)
-      .then((response) => { // status 200
-        item.status = response.status
-        item.mensaje = response.statusText
-        return item
-      })
-      .catch((err) => {
-        if (err.response) {// 300, 400, 500
-          item.status = err.response.status;
-          item.mensaje = err.response.statusText
-        } else { //uNDEFINED
-          item.status = 404
-          item.mensaje = 'Not found'
-        }
-        return item
-      });
-  });
-  return Promise.all(arrayPromises)
-}
-
-*/

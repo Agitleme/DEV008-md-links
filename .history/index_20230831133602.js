@@ -15,21 +15,25 @@ export function mdLinks (path, options) {
   reject('Route invalid')
  }
 //Dependiendo de si la ruta representa un archivo o un directorio, 
-//se crea un arreglo llamado arrayAllFile que contendrá rutas de archivos.
+//se crea un arreglo llamado arrayAllFile que contendrá 
+//rutas de archivos.
  let arrayAllFile = []; //contiene todos los archivos
  if (isFiles(routeA) === true) {
    arrayAllFile.push(routeA)
  } else {
    arrayAllFile = fileDirectory(routeA)
+   //console.log(arrayAllFile)
 }
 
 const mdFiltro = filterMD(arrayAllFile)
 if (mdFiltro.length === 0) reject ('Does not have MD files')
- let contentMD = fileToStringArray(mdFiltro)
- resolve (contentMD)
+ //
+   //console.log(mdFiltro)
+   
+const contentMD = fileToStringArray(mdFiltro)
+console.log(contentMD)
 
- const theSameLinks = linkFinder(contentMD)
- console.log(theSameLinks)
+console.log(linkFinder)
 
  
 })
@@ -39,7 +43,7 @@ if (mdFiltro.length === 0) reject ('Does not have MD files')
 
 // Consumir la promesa 
 //links para función de links 
-mdLinks ("./testFile")
+mdLinks ("./README.md")
 .then(links => {
 console.log('keeping promise', links)
 });
