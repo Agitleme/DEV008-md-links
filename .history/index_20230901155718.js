@@ -49,7 +49,7 @@ export function mdLinks(path, options) {
         .then((resposes) => {
           resolve(resposes);
         })
-        .catch((errors) => {
+        .catch((error) => {
           console.log("errors");
         });
     } else {
@@ -60,7 +60,7 @@ export function mdLinks(path, options) {
         .then((resposes) => {
           resolve(resposes.links);
         })
-        .catch((errors) => {
+        .catch((error) => {
           console.log("errors");
         });
     }

@@ -42,7 +42,7 @@ export function mdLinks(path, options) {
     //constante donde vamos a gusradar las promesa
     const arrayPromes = [];
     if (options.validate === true) {
-      theSameLinks.forEach((element) => {
+      links.forEach((element) => {
         arrayPromes.push(validateLinks(element));
       });
       Promise.all(arrayPromes)
@@ -50,10 +50,10 @@ export function mdLinks(path, options) {
           resolve(resposes);
         })
         .catch((errors) => {
-          console.log("errors");
+          console.log("error");
         });
     } else {
-      theSameLinks.forEach((element) => {
+      links.forEach((element) => {
         arrayPromes.push(validateLinks(element));
       });
       Promise.all(arrayPromes)
@@ -61,7 +61,7 @@ export function mdLinks(path, options) {
           resolve(resposes.links);
         })
         .catch((errors) => {
-          console.log("errors");
+          console.log("error");
         });
     }
   });

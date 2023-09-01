@@ -108,11 +108,17 @@ export function linkFinder(stringObject) {
   return links; // Devolvemos el arreglo de enlaces encontrados.
 }
 
-export function validateLinks(link) {
+export function validateLinks(links) {
   //La función map se utiliza para iterar sobre cada elemento del arreglo links.
   //En este caso, link es una variable que representa cada elemento (enlace) en el arreglo.
-  return fetch(link.href)
+  return links.map((link) =>
+    //Aquí se utiliza la función fetch para realizar una solicitud HTTP a la URL (link.href) del enlace.
+    //Se utiliza el método 'HEAD', que es una solicitud que solicita solo los encabezados de la respuesta,
+    //no el contenido completo de la página. Esta solicitud se realiza de forma asíncrona.
+    fetch(link.href, { method: "HEAD" })
       //Aquí se utiliza la función fetch para realizar una solicitud HTTP a la URL (link.href) del enlace.
+      //Se utiliza el método 'HEAD', que es una solicitud que solicita solo los encabezados de la respuesta,
+      // no el contenido completo de la página. Esta solicitud se realiza de forma asíncrona.
       .then((response) => {
         return {
           href: link.href,
@@ -125,5 +131,5 @@ export function validateLinks(link) {
       //Si no es posible obtener el código de estado, se establece en 404 por defecto.
 
       .catch((error) => {})
-  
+  );
 }

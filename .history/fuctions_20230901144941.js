@@ -108,22 +108,29 @@ export function linkFinder(stringObject) {
   return links; // Devolvemos el arreglo de enlaces encontrados.
 }
 
-export function validateLinks(link) {
-  //La función map se utiliza para iterar sobre cada elemento del arreglo links.
-  //En este caso, link es una variable que representa cada elemento (enlace) en el arreglo.
-  return fetch(link.href)
-      //Aquí se utiliza la función fetch para realizar una solicitud HTTP a la URL (link.href) del enlace.
+export function validateLinks(links) {
+  return links.map((link) =>
+    fetch(link.href, { method: "HEAD" })
       .then((response) => {
         return {
           href: link.href,
           text: link.text,
           file: link.file,
+          line: link.line,
           status: response.status,
-          message: response.statusText,
+          ok: true,
         };
       })
-      //Si no es posible obtener el código de estado, se establece en 404 por defecto.
-
-      .catch((error) => {})
-  
+      .catch((error) => {
+        const status = error.response ? error.response.status : 404;
+        return {
+          href: link.href,
+          text: link.text,
+          file: link.file,
+          line: link.line,
+          status,
+          ok: false,
+        };
+      })
+  );
 }

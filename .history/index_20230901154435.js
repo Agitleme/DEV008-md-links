@@ -42,27 +42,12 @@ export function mdLinks(path, options) {
     //constante donde vamos a gusradar las promesa
     const arrayPromes = [];
     if (options.validate === true) {
-      theSameLinks.forEach((element) => {
-        arrayPromes.push(validateLinks(element));
+      links.forEach((element) => {
+        arrayPromes.push(validateLinks(element))
       });
-      Promise.all(arrayPromes)
-        .then((resposes) => {
-          resolve(resposes);
-        })
-        .catch((errors) => {
-          console.log("errors");
-        });
-    } else {
-      theSameLinks.forEach((element) => {
-        arrayPromes.push(validateLinks(element));
-      });
-      Promise.all(arrayPromes)
-        .then((resposes) => {
-          resolve(resposes.links);
-        })
-        .catch((errors) => {
-          console.log("errors");
-        });
+    Promise.all(arrayPromes).then((resposes)=>{
+      resolve(resposes)
+    }).catch(())
     }
   });
 }

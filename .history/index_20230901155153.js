@@ -50,7 +50,7 @@ export function mdLinks(path, options) {
           resolve(resposes);
         })
         .catch((errors) => {
-          console.log("errors");
+          console.log("error");
         });
     } else {
       theSameLinks.forEach((element) => {
@@ -61,7 +61,7 @@ export function mdLinks(path, options) {
           resolve(resposes.links);
         })
         .catch((errors) => {
-          console.log("errors");
+          console.log("error");
         });
     }
   });

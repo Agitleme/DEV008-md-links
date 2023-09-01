@@ -113,6 +113,8 @@ export function validateLinks(link) {
   //En este caso, link es una variable que representa cada elemento (enlace) en el arreglo.
   return fetch(link.href)
       //Aquí se utiliza la función fetch para realizar una solicitud HTTP a la URL (link.href) del enlace.
+      //Se utiliza el método 'HEAD', que es una solicitud que solicita solo los encabezados de la respuesta,
+      // no el contenido completo de la página. Esta solicitud se realiza de forma asíncrona.
       .then((response) => {
         return {
           href: link.href,

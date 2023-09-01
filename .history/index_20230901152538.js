@@ -11,7 +11,7 @@ import {
   filterMD,
   fileToStringArray,
   linkFinder,
-  validateLinks,
+  validateLinks
 } from "./fuctions.js";
 
 export function mdLinks(path, options) {
@@ -37,38 +37,19 @@ export function mdLinks(path, options) {
     let contentMD = fileToStringArray(mdFiltro);
 
     const theSameLinks = linkFinder(contentMD);
-    //resolve(theSameLinks);
+    resolve(theSameLinks);
 
-    //constante donde vamos a gusradar las promesa
-    const arrayPromes = [];
-    if (options.validate === true) {
-      theSameLinks.forEach((element) => {
-        arrayPromes.push(validateLinks(element));
-      });
-      Promise.all(arrayPromes)
-        .then((resposes) => {
-          resolve(resposes);
-        })
-        .catch((errors) => {
-          console.log("errors");
-        });
-    } else {
-      theSameLinks.forEach((element) => {
-        arrayPromes.push(validateLinks(element));
-      });
-      Promise.all(arrayPromes)
-        .then((resposes) => {
-          resolve(resposes.links);
-        })
-        .catch((errors) => {
-          console.log("errors");
-        });
+//constante donde vamos a gusradar las promesa
+    const arrayPromes= [];
+    if (options.validateLinks === true){ 
+ 
     }
+
   });
 }
 
 // Consumir la promesa
 //links para función de links
-mdLinks("./testFile", { validate: true }).then((links) => {
+mdLinks("./testFile").then((links) => {
   console.log("keeping promise", links);
 });
