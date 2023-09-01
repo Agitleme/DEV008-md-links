@@ -23,7 +23,6 @@ export function routeValid(route) {
 //path.resolve se usa para pasar de una ruta relativa a una absoluta
 export function routeAbsolute(route) {
   if (path.isAbsolute(route)) {
-    return route;
     // Si la ruta es absoluta
     //console.log(chalk.bgGreen("absolute path", route));
   } else {
@@ -87,14 +86,11 @@ export function linkFinder(stringObject) {
   const links = []; // Aquí almacenaremos los enlaces encontrados.
   const regex = /\[([^\]]+)\]\(([^)]+)\)/g; // Expresión regular para buscar enlaces en formato Markdown.
 
-  stringObject.forEach((file) => {
-    // Iteramos a través de cada objeto de cadena en la entrada.
+  stringObject.forEach((file) => { // Iteramos a través de cada objeto de cadena en la entrada.
     const matches = file.content.match(regex); // Buscamos todas las coincidencias de enlaces en el contenido del archivo.
 
-    if (matches) {
-      // Si se encontraron coincidencias de enlaces en el archivo.
-      matches.forEach((linkMatch) => {
-        // Iteramos a través de cada coincidencia de enlace encontrada.
+    if (matches) { // Si se encontraron coincidencias de enlaces en el archivo.
+      matches.forEach((linkMatch) => { // Iteramos a través de cada coincidencia de enlace encontrada.
         const matchParts = linkMatch.match(/\[([^\]]+)\]\(([^)]+)\)/);
         // La expresión regular anterior busca el texto y la URL dentro de una coincidencia de enlace.
         const text = matchParts[1]; // Capturamos el texto del enlace.
@@ -105,5 +101,8 @@ export function linkFinder(stringObject) {
       });
     }
   });
+
   return links; // Devolvemos el arreglo de enlaces encontrados.
 }
+
+

@@ -34,9 +34,11 @@ export function mdLinks(path, options) {
     const mdFiltro = filterMD(arrayAllFile);
     if (mdFiltro.length === 0) reject("Does not have MD files");
     let contentMD = fileToStringArray(mdFiltro);
+    
 
     const theSameLinks = linkFinder(contentMD);
-    resolve(theSameLinks);
+    //console.log(theSameLinks);
+    resolve(contentMD);
   });
 }
 

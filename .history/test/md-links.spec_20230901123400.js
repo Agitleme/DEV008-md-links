@@ -1,4 +1,4 @@
-import { routeValid, routeAbsolute } from '../fuctions';
+import { routeValid,  } from '../fuctions';
 import path from 'path';
 import fs from 'fs';
 import {mdLinks} from '../index';
@@ -31,17 +31,18 @@ describe('routeValid', () => {
 });
 
 // routeAbsolute
-//Si una ruta absoluta proporcionada como entrada devuelve la misma ruta.
-describe('ruta absoluta', () => {
-  const route = 'C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile\\file1.md';
-  expect(routeAbsolute(route)).toBe(route);
+test('ruta absoluta', () => {
+  const ruta = '/ruta/absoluta/ejemplo';
+  expect(routeAbsolute(ruta)).toBe(ruta);
 });
 
-//Si una ruta relativa proporcionada como entrada se convierte correctamente en 
-//una ruta absoluta utilizando path.resolve.
-describe('ruta relativa convertida en absoluta', () => {
-  const rutaRelativa = '../README.md';
+test('ruta relativa convertida en absoluta', () => {
+  const rutaRelativa = './ruta/relativa/ejemplo';
   const rutaAbsoluta = path.resolve(rutaRelativa);
   expect(routeAbsolute(rutaRelativa)).toBe(rutaAbsoluta);
 });
 
+test('ruta absoluta ya convertida', () => {
+  const rutaAbsoluta = '/ruta/absoluta/ejemplo';
+  expect(routeAbsolute(rutaAbsoluta)).toBe(rutaAbsoluta);
+});
