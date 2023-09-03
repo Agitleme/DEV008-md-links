@@ -37,7 +37,7 @@ export function mdLinks(path, options) {
     let contentMD = fileToStringArray(mdFiltro);
 
     const theSameLinks = linkFinder(contentMD);
-   //resolve(theSameLinks);
+    //resolve(theSameLinks);
 
     //constante donde vamos a gusradar las promesa
     const arrayPromes = [];
@@ -50,7 +50,7 @@ export function mdLinks(path, options) {
           resolve(resposes);
         })
         .catch((errors) => {
-          console.log("errors");
+          console.log("error");
         });
     } else {
       theSameLinks.forEach((element) => {
@@ -61,7 +61,7 @@ export function mdLinks(path, options) {
           resolve(resposes.links);
         })
         .catch((errors) => {
-          console.log("errors");
+          console.log("error");
         });
     }
   });

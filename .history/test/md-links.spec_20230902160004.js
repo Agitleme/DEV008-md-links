@@ -1,5 +1,4 @@
-import { routeValid, routeAbsolute, isFiles, fileDirectory, filterMD, fileToStringArray} from "../fuctions";
-import { aux1, aux2, aux3, rutaYContenido,  } from "../test/auxiliar";
+import { routeValid, routeAbsolute, isFiles, fileDirectory } from "../fuctions";
 import path from "path";
 import fs from "fs";
 import { mdLinks } from "../index";
@@ -42,57 +41,32 @@ describe("ruta absoluta", () => {
 
 //Si una ruta relativa proporcionada como entrada se convierte correctamente en
 //una ruta absoluta utilizando path.resolve.
-describe("ruta relativa convertida en absoluta", () => {
+describe('ruta relativa convertida en absoluta', () => {
   const rutaRelativa = "../README.md";
   const rutaAbsoluta = path.resolve(rutaRelativa);
   expect(routeAbsolute(rutaRelativa)).toBe(rutaAbsoluta);
 });
 
 // isFiles
-describe("isFiles", () => {
-  it("deberia ser una funcion", () => {
-    expect(typeof isFiles).toBe("function");
+describe('isFiles', () => {
+  it('deberia ser una funcion', () => {
+    expect(typeof isFiles).toBe('function');
   });
-  it("debería devolver true cuando se trata de un archivo", async () => {
-    expect(isFiles("./README.md")).toBe(true);
+  it('debería devolver true cuando se trata de un archivo', async () => {
+    expect(isFiles('./README.md')).toBe(true)
   });
-  it("debería devolver false cuandose trata de un directorio", async () => {
-    expect(isFiles("./testFile")).toBe(false);
+  it('debería devolver false cuandose trata de un directorio', async () => {
+    expect(isFiles('./testFile')).toBe(false)
   });
-});
+})
 
 //fileDirectory
-describe("fileDirectory", () => {
-  it("deberia ser una funcion", () => {
-    expect(typeof fileDirectory).toBe("function");
-  });
-  it("deberia retornar un array de archivos que se encuentran en un directorio", async () => {
-    expect(
-      fileDirectory(
-        "C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile"
-      )
-    ).toEqual(aux1);
-  });
-});
-
-//filterMD
-describe('filterMD', () => {
+describe('fileDirectory', () => {
   it('deberia ser una funcion', () => {
-    expect(typeof filterMD).toBe('function');
+    expect(typeof fileDirectory).toBe('function');
   });
-  it('deberia retornar archivos .md', async () => {
-    expect(filterMD(aux1)).toEqual(aux2)
-
-  });
-});
-
-//fileToStringArray
-describe('fileToStringArray', () => {
-  it('deberia ser una funcion', () => {
-    expect(typeof fileToStringArray).toBe('function');
-  });
-  it('debe proporcionar un array de objetos (aux3) que incluyan ruta así como contenido', async () => {
-    expect(fileToStringArray(aux3)).toStrictEqual(rutaYContenido)
+  it('deberia retornar un array de archivos que se encuentran en un directorio', async () => {
+    expect(fileDirectory('C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile')).toEqual(filesInDir)
 
   });
 })

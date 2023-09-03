@@ -1,5 +1,5 @@
 import path from "path";
-//import chalk from "chalk";
+import chalk from "chalk";
 import fs from "fs";
 //import { pathToFileURL } from "url";
 /* aqui van todas la funciones, validad una ruta, path a absuluto abiri con console log "node espacio y nombre del archivo"
@@ -34,7 +34,7 @@ export function routeAbsolute(route) {
 }
 
 //verificar si es archivo o directorio
-export function isFiles(route) {
+export function isFiles(route, fs) {
   // Obtiene el estado (metadatos) del archivo o directorio en la ruta
   const state = fs.statSync(route);
   // Devuelve el objeto de estado (metadatos) obtenido
@@ -111,8 +111,7 @@ export function linkFinder(stringObject) {
 export function validateLinks(link) {
   //La función map se utiliza para iterar sobre cada elemento del arreglo links.
   //En este caso, link es una variable que representa cada elemento (enlace) en el arreglo.
-  return (
-    fetch(link.href)
+  return fetch(link.href)
       //Aquí se utiliza la función fetch para realizar una solicitud HTTP a la URL (link.href) del enlace.
       .then((response) => {
         return {
@@ -126,5 +125,5 @@ export function validateLinks(link) {
       //Si no es posible obtener el código de estado, se establece en 404 por defecto.
 
       .catch((error) => {})
-  );
+  
 }

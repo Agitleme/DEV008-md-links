@@ -37,7 +37,7 @@ export function mdLinks(path, options) {
     let contentMD = fileToStringArray(mdFiltro);
 
     const theSameLinks = linkFinder(contentMD);
-   //resolve(theSameLinks);
+    //resolve(theSameLinks);
 
     //constante donde vamos a gusradar las promesa
     const arrayPromes = [];
