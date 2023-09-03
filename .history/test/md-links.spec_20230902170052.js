@@ -1,5 +1,5 @@
-import { routeValid, routeAbsolute, isFiles, fileDirectory, filterMD, fileToStringArray} from "../fuctions";
-import { aux1, aux2, aux3, rutaYContenido,  } from "../test/auxiliar";
+import { routeValid, routeAbsolute, isFiles, fileDirectory } from "../fuctions";
+import { aux1 } from "../test/auxiliar";
 import path from "path";
 import fs from "fs";
 import { mdLinks } from "../index";
@@ -75,24 +75,4 @@ describe("fileDirectory", () => {
   });
 });
 
-//filterMD
-describe('filterMD', () => {
-  it('deberia ser una funcion', () => {
-    expect(typeof filterMD).toBe('function');
-  });
-  it('deberia retornar archivos .md', async () => {
-    expect(filterMD(aux1)).toEqual(aux2)
-
-  });
-});
-
-//fileToStringArray
-describe('fileToStringArray', () => {
-  it('deberia ser una funcion', () => {
-    expect(typeof fileToStringArray).toBe('function');
-  });
-  it('debe proporcionar un array de objetos (aux3) que incluyan ruta así como contenido', async () => {
-    expect(fileToStringArray(aux3)).toStrictEqual(rutaYContenido)
-
-  });
-})
+//

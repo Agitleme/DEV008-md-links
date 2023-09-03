@@ -1,5 +1,5 @@
 import { routeValid, routeAbsolute, isFiles, fileDirectory, filterMD, fileToStringArray} from "../fuctions";
-import { aux1, aux2, aux3, rutaYContenido,  } from "../test/auxiliar";
+import { aux1, aux2, aux3 } from "../test/auxiliar";
 import path from "path";
 import fs from "fs";
 import { mdLinks } from "../index";
@@ -92,7 +92,7 @@ describe('fileToStringArray', () => {
     expect(typeof fileToStringArray).toBe('function');
   });
   it('debe proporcionar un array de objetos (aux3) que incluyan ruta así como contenido', async () => {
-    expect(fileToStringArray(aux3)).toStrictEqual(rutaYContenido)
+    expect(fileToStringArray(aux3)).toEqual(fileToStr)
 
   });
 })

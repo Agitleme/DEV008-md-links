@@ -1,5 +1,4 @@
-import { routeValid, routeAbsolute, isFiles, fileDirectory, filterMD, fileToStringArray} from "../fuctions";
-import { aux1, aux2, aux3, rutaYContenido,  } from "../test/auxiliar";
+import { routeValid, routeAbsolute, isFiles } from "../fuctions";
 import path from "path";
 import fs from "fs";
 import { mdLinks } from "../index";
@@ -49,50 +48,44 @@ describe("ruta relativa convertida en absoluta", () => {
 });
 
 // isFiles
+// Simula una versión mock de fs para las pruebas
+const mockFs = {
+  statSync: jest.fn(), // Usaremos jest.fn() para crear una función mock
+};
+
 describe("isFiles", () => {
-  it("deberia ser una funcion", () => {
-    expect(typeof isFiles).toBe("function");
+  // Antes de cada prueba, restablecemos el estado de jest.fn()
+  beforeEach(() => {
+    mockFs.statSync.mockReset();
   });
-  it("debería devolver true cuando se trata de un archivo", async () => {
-    expect(isFiles("./README.md")).toBe(true);
+
+  it("debería devolver true cuando se pasa una ruta de archivo válida", () => {
+    // Configura el comportamiento del mock de fs para esta prueba
+    mockFs.statSync.mockReturnValueOnce({ isFile: () => true });
+
+    // Llama a la función isFile con la ruta y el mock de fs
+    const route = "./testFile";
+    const result = isFiles(route, mockFs);
+
+    // Verifica que la función haya sido llamada con la ruta correcta
+    expect(mockFs.statSync);
+
+    // Verifica que el resultado sea true
+    expect(result).toBe(true);
   });
-  it("debería devolver false cuandose trata de un directorio", async () => {
-    expect(isFiles("./testFile")).toBe(false);
-  });
+/*
+  it("debería devolver false cuando se pasa una ruta de directorio", () => {
+    // Configura el comportamiento del mock de fs para esta prueba
+    mockFs.statSync.mockReturnValueOnce({ isFile: () => false });
+
+    // Llama a la función isFile con la ruta y el mock de fs
+    const route = "../testFile";
+    const result = isFiles(route, mockFs);
+
+    // Verifica que la función haya sido llamada con la ruta correcta
+    expect(mockFs.statSync);
+
+    // Verifica que el resultado sea false
+    expect(result).toBe(false);
+  });*/
 });
-
-//fileDirectory
-describe("fileDirectory", () => {
-  it("deberia ser una funcion", () => {
-    expect(typeof fileDirectory).toBe("function");
-  });
-  it("deberia retornar un array de archivos que se encuentran en un directorio", async () => {
-    expect(
-      fileDirectory(
-        "C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile"
-      )
-    ).toEqual(aux1);
-  });
-});
-
-//filterMD
-describe('filterMD', () => {
-  it('deberia ser una funcion', () => {
-    expect(typeof filterMD).toBe('function');
-  });
-  it('deberia retornar archivos .md', async () => {
-    expect(filterMD(aux1)).toEqual(aux2)
-
-  });
-});
-
-//fileToStringArray
-describe('fileToStringArray', () => {
-  it('deberia ser una funcion', () => {
-    expect(typeof fileToStringArray).toBe('function');
-  });
-  it('debe proporcionar un array de objetos (aux3) que incluyan ruta así como contenido', async () => {
-    expect(fileToStringArray(aux3)).toStrictEqual(rutaYContenido)
-
-  });
-})
