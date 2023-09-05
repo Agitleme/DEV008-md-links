@@ -160,7 +160,6 @@ export function statsBroken(arrayTheSameLinks) {
   const setUniques = new Set();
   // Iterar a través de cada elemento del arreglo 'arrayLinks'.
   arrayTheSameLinks.forEach((item) => {
-    console.log(item.href)
     setUniques.add(item.href); // Agregar la propiedad 'href' de cada elemento al conjunto 'setUniques'.
   });
   const broken = arrayTheSameLinks.filter((item) => item.status !== 200); // Filtrar los elementos en 'arrayLinks' donde la propiedad 'status' no sea igual a 200.
@@ -171,10 +170,10 @@ export function statsBroken(arrayTheSameLinks) {
     broken: broken.length, // La cantidad de elementos en 'arrayLinks' con 'status' diferente de 200.
   };
 }
-
+/*
 console.log(
   statsBroken([
     "https://github.com/Laboratoria/DEV008-md-152648",
     "https://github.com/Laboratoria/DEV008-md-2378",
   ])
- );
+ );*/

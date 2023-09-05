@@ -53,9 +53,14 @@ export function mdLinks(path, options) {
         .catch((errors) => {
           console.log("errors");
         });
-    } else if (options.validate === false && options.stats === true) {
-      console.log("probando----");
-    } else {
+    } else if (options.validate === false && statsLinks === true)
+
+
+
+
+    ){}
+    else
+    {
       theSameLinks.forEach((element) => {
         arrayPromes.push(validateLinks(element));
       });
@@ -68,13 +73,15 @@ export function mdLinks(path, options) {
         });
     }
   });
+
+
+
 }
 
 // Consumir la promesa
 //links para función de links
-
 mdLinks("./testFile", {
-  validate: true, stats: true//puede ser verdadero o falso
+  validate: true, //stats//puede ser verdadero o falso
 }).then((links) => {
-  console.log("keeping promise1", links);
+  console.log("keeping promise", links);
 });

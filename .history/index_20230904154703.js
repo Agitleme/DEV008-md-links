@@ -74,7 +74,7 @@ export function mdLinks(path, options) {
 //links para función de links
 
 mdLinks("./testFile", {
-  validate: true, stats: true//puede ser verdadero o falso
+  validate: true, //stats//puede ser verdadero o falso
 }).then((links) => {
   console.log("keeping promise1", links);
 });

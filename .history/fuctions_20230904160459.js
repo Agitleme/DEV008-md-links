@@ -160,7 +160,6 @@ export function statsBroken(arrayTheSameLinks) {
   const setUniques = new Set();
   // Iterar a través de cada elemento del arreglo 'arrayLinks'.
   arrayTheSameLinks.forEach((item) => {
-    console.log(item.href)
     setUniques.add(item.href); // Agregar la propiedad 'href' de cada elemento al conjunto 'setUniques'.
   });
   const broken = arrayTheSameLinks.filter((item) => item.status !== 200); // Filtrar los elementos en 'arrayLinks' donde la propiedad 'status' no sea igual a 200.

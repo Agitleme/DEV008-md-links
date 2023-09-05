@@ -1,7 +1,6 @@
 import path from "path";
 //import chalk from "chalk";
 import fs from "fs";
-import { log } from "console";
 //import { pathToFileURL } from "url";
 /* aqui van todas la funciones, validad una ruta, path a absuluto abiri con console log "node espacio y nombre del archivo"
 npm i path es una libreria de node que nos permite trabajar con rutas.
@@ -110,6 +109,7 @@ export function linkFinder(stringObject) {
 }
 
 export function validateLinks(link) {
+  //La función map se utiliza para iterar sobre cada elemento del arreglo links.
   //En este caso, link es una variable que representa cada elemento (enlace) en el arreglo.
   return (
     fetch(link.href)
@@ -129,52 +129,8 @@ export function validateLinks(link) {
   );
 }
 
-//Estadisticas de los links
-export function statsLinks(arrayTheSameLinks) {
-  //arreglo de objetos que representan enlaces.
-  const setUniques = new Set();//es una estructura de datos en JavaScript que solo permite almacenar valores únicos, lo que significa que no puede haber duplicados en él.
-  arrayTheSameLinks.forEach((item) => setUniques.add(item.href)); // Esto tiene el efecto de almacenar solo las URLs únicas en setUniques.
-  return { total: arrayTheSameLinks.length, unique: setUniques.size };
+export function statusLinks(arrayTheSameLinks) {
+  const setUniques = new Set();  //set es un tipo de dato que nos ayuda almacenar valores unicos 
+  arrayLinks.forEach(item => setUniques.add(item.href));
+  return { total: arrayLinks.length, unique: setUniques.size }
 }
-console.log(
-  statsLinks([
-    {
-      href: "https://github.com/Laboratoria/DEV008-md-links",
-      text: "lo que sea",
-      file: "C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile\\file1.md",
-      status: 200,
-      message: "ok",
-    },
-
-    {
-      href: "https://github.com/Laboratoria/DEV008-md-links",
-      text: "lo que sea",
-      file: "C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile\\file1.md",
-      status: 400,
-      message: "Fail",
-    }
-  ])
-);
-
-export function statsBroken(arrayTheSameLinks) {
-  const setUniques = new Set();
-  // Iterar a través de cada elemento del arreglo 'arrayLinks'.
-  arrayTheSameLinks.forEach((item) => {
-    console.log(item.href)
-    setUniques.add(item.href); // Agregar la propiedad 'href' de cada elemento al conjunto 'setUniques'.
-  });
-  const broken = arrayTheSameLinks.filter((item) => item.status !== 200); // Filtrar los elementos en 'arrayLinks' donde la propiedad 'status' no sea igual a 200.
-  // Devolver un objeto que contiene tres propiedades: 'total', 'unique' y 'broken'.
-  return {
-    total: arrayTheSameLinks.length, // El total de elementos en 'arrayLinks'.
-    unique: setUniques.size, // La cantidad de valores únicos en 'setUniques'.
-    broken: broken.length, // La cantidad de elementos en 'arrayLinks' con 'status' diferente de 200.
-  };
-}
-
-console.log(
-  statsBroken([
-    "https://github.com/Laboratoria/DEV008-md-152648",
-    "https://github.com/Laboratoria/DEV008-md-2378",
-  ])
- );

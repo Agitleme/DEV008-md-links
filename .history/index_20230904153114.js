@@ -13,7 +13,8 @@ import {
   linkFinder,
   validateLinks,
   statsLinks,
-  statsBroken,
+  statsBroken
+
 } from "./fuctions.js";
 
 export function mdLinks(path, options) {
@@ -39,7 +40,7 @@ export function mdLinks(path, options) {
     let contentMD = fileToStringArray(mdFiltro);
 
     const theSameLinks = linkFinder(contentMD);
-
+  
     //constante donde vamos a gusradar las promesa
     const arrayPromes = [];
     if (options.validate === true) {
@@ -53,28 +54,28 @@ export function mdLinks(path, options) {
         .catch((errors) => {
           console.log("errors");
         });
-    } else if (options.validate === false && options.stats === true) {
-      console.log("probando----");
+      
     } else {
       theSameLinks.forEach((element) => {
         arrayPromes.push(validateLinks(element));
       });
       Promise.all(arrayPromes)
         .then((resposes) => {
+        
           resolve(resposes.links);
         })
         .catch((errors) => {
           console.log("errors");
         });
     }
+ 
   });
+
 }
 
 // Consumir la promesa
 //links para función de links
-
-mdLinks("./testFile", {
-  validate: true, stats: true//puede ser verdadero o falso
-}).then((links) => {
-  console.log("keeping promise1", links);
+mdLinks("./testFile", { validate: true, //stats//puede ser verdadero o falso 
+ }).then((links) => {
+  console.log("keeping promise", links);
 });

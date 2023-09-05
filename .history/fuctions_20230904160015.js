@@ -132,7 +132,7 @@ export function validateLinks(link) {
 //Estadisticas de los links
 export function statsLinks(arrayTheSameLinks) {
   //arreglo de objetos que representan enlaces.
-  const setUniques = new Set();//es una estructura de datos en JavaScript que solo permite almacenar valores únicos, lo que significa que no puede haber duplicados en él.
+  const setUniques = new Set(); //es una estructura de datos en JavaScript que solo permite almacenar valores únicos, lo que significa que no puede haber duplicados en él.
   arrayTheSameLinks.forEach((item) => setUniques.add(item.href)); // Esto tiene el efecto de almacenar solo las URLs únicas en setUniques.
   return { total: arrayTheSameLinks.length, unique: setUniques.size };
 }
@@ -160,7 +160,6 @@ export function statsBroken(arrayTheSameLinks) {
   const setUniques = new Set();
   // Iterar a través de cada elemento del arreglo 'arrayLinks'.
   arrayTheSameLinks.forEach((item) => {
-    console.log(item.href)
     setUniques.add(item.href); // Agregar la propiedad 'href' de cada elemento al conjunto 'setUniques'.
   });
   const broken = arrayTheSameLinks.filter((item) => item.status !== 200); // Filtrar los elementos en 'arrayLinks' donde la propiedad 'status' no sea igual a 200.
@@ -171,10 +170,10 @@ export function statsBroken(arrayTheSameLinks) {
     broken: broken.length, // La cantidad de elementos en 'arrayLinks' con 'status' diferente de 200.
   };
 }
-
+/*
 console.log(
   statsBroken([
     "https://github.com/Laboratoria/DEV008-md-152648",
     "https://github.com/Laboratoria/DEV008-md-2378",
   ])
- );
+ );*/

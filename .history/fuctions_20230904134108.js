@@ -110,6 +110,7 @@ export function linkFinder(stringObject) {
 }
 
 export function validateLinks(link) {
+  //La función map se utiliza para iterar sobre cada elemento del arreglo links.
   //En este caso, link es una variable que representa cada elemento (enlace) en el arreglo.
   return (
     fetch(link.href)
@@ -132,38 +133,24 @@ export function validateLinks(link) {
 //Estadisticas de los links
 export function statsLinks(arrayTheSameLinks) {
   //arreglo de objetos que representan enlaces.
-  const setUniques = new Set();//es una estructura de datos en JavaScript que solo permite almacenar valores únicos, lo que significa que no puede haber duplicados en él.
+  const setUniques = new Set(); //es una estructura de datos en JavaScript que solo permite almacenar valores únicos, lo que significa que no puede haber duplicados en él.
   arrayTheSameLinks.forEach((item) => setUniques.add(item.href)); // Esto tiene el efecto de almacenar solo las URLs únicas en setUniques.
   return { total: arrayTheSameLinks.length, unique: setUniques.size };
 }
 console.log(
   statsLinks([
-    {
-      href: "https://github.com/Laboratoria/DEV008-md-links",
-      text: "lo que sea",
-      file: "C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile\\file1.md",
-      status: 200,
-      message: "ok",
-    },
-
-    {
-      href: "https://github.com/Laboratoria/DEV008-md-links",
-      text: "lo que sea",
-      file: "C:\\Users\\apaom\\OneDrive\\Escritorio\\MD Links\\DEV008-md-links\\testFile\\file1.md",
-      status: 400,
-      message: "Fail",
-    }
-  ])
+    "https://github.com/Laboratoria/DEV008-md-links",
+    "https://github.com/Laboratoria/DEV008-md-links",
+  ]),
+  ".href"
 );
 
 export function statsBroken(arrayTheSameLinks) {
   const setUniques = new Set();
   // Iterar a través de cada elemento del arreglo 'arrayLinks'.
-  arrayTheSameLinks.forEach((item) => {
-    console.log(item.href)
-    setUniques.add(item.href); // Agregar la propiedad 'href' de cada elemento al conjunto 'setUniques'.
+  arrayTheSameLinks.forEach((item) => {setUniques.add(item.href); // Agregar la propiedad 'href' de cada elemento al conjunto 'setUniques'.
   });
-  const broken = arrayTheSameLinks.filter((item) => item.status !== 200); // Filtrar los elementos en 'arrayLinks' donde la propiedad 'status' no sea igual a 200.
+  const broken = arrayTheSameLinks.filter((item) => item.status !== 200);  // Filtrar los elementos en 'arrayLinks' donde la propiedad 'status' no sea igual a 200.
   // Devolver un objeto que contiene tres propiedades: 'total', 'unique' y 'broken'.
   return {
     total: arrayTheSameLinks.length, // El total de elementos en 'arrayLinks'.
@@ -173,8 +160,5 @@ export function statsBroken(arrayTheSameLinks) {
 }
 
 console.log(
-  statsBroken([
-    "https://github.com/Laboratoria/DEV008-md-152648",
-    "https://github.com/Laboratoria/DEV008-md-2378",
-  ])
- );
+
+ )
