@@ -64,17 +64,21 @@ export function mdLinks(path, options) {
 
       resolve({
         total: totalLinks,
-        unique: totalstats,
-      });
-    } else if (options.validate === true && options.stats === true) {
+        total: totalstats,
+       
+      })
+
+      }    
+     else if (options.validate === true && options.stats === true) {
       const totalLinks = fusionStats(theSameLinks);
       const totalstats = statsLinks(theSameLinks);
       const totalBroken = statsBroken(theSameLinks);
       resolve({
         total: totalLinks,
-        unique: totalstats,
+        total: totalstats,
         broken: totalBroken,
-      });
+      })
+           
     }
   });
 }
@@ -83,7 +87,7 @@ export function mdLinks(path, options) {
 //links para función de links
 
 mdLinks("./README.md", {
-  validate: true,
+  validate: false,
   stats: true,
 }).then((links) => {
   console.log("keeping promise!", links);

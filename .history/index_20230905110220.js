@@ -14,7 +14,6 @@ import {
   validateLinks,
   statsLinks,
   statsBroken,
-  fusionStats,
 } from "./fuctions.js";
 
 export function mdLinks(path, options) {
@@ -43,7 +42,7 @@ export function mdLinks(path, options) {
 
     //constante donde vamos a gusradar las promesa
     const arrayPromes = [];
-    if (options.validate === true && options.stats === false) {
+    if (options.validate === true) {
       theSameLinks.forEach((element) => {
         arrayPromes.push(validateLinks(element));
       });
@@ -54,37 +53,51 @@ export function mdLinks(path, options) {
         .catch((errors) => {
           console.log("errors");
         });
-    } else if (options.validate === false && options.stats === false) {
-      theSameLinks.forEach((element) => {
-        console.log(element);
-      });
     } else if (options.validate === false && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
-      const totalstats = statsLinks(theSameLinks);
-
-      resolve({
-        total: totalLinks,
-        unique: totalstats,
+      console.log("probando----");
+    } else {
+      theSameLinks.forEach((element) => {
+        arrayPromes.push(validateLinks(element));
       });
-    } else if (options.validate === true && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
-      const totalstats = statsLinks(theSameLinks);
-      const totalBroken = statsBroken(theSameLinks);
-      resolve({
-        total: totalLinks,
-        unique: totalstats,
-        broken: totalBroken,
-      });
+      Promise.all(arrayPromes)
+        .then((resposes) => {
+          resolve(resposes.links);
+        })
+        .catch((errors) => {
+          console.log("errors");
+        });
     }
+    //En otras palabras, verifica si ambas propiedades son false.
+    if (options.validate === false && options.stats === false) {
+      resolve(links);
+    }
+    //
+    if (options.validate === true && options.stats === false) {
+      axiosPeticion(links)
+        .then((response) => resolve(response));
+    }
+
+    if (options.validate === false && options.stats === true) {
+      resolve(stats(links));
+    }
+    if (options.validate === true && options.stats === true) {
+      axiosPeticion(links)
+        .then((response) => resolve(statsValidate(response)));
+    }
+
+
+
+
+
+
   });
 }
 
 // Consumir la promesa
 //links para función de links
 
-mdLinks("./README.md", {
-  validate: true,
-  stats: true,
+mdLinks("./testFile", {
+  validate: true, stats: true//puede ser verdadero o falso
 }).then((links) => {
-  console.log("keeping promise!", links);
+  console.log("keeping promise1", links);
 });

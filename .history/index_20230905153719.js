@@ -72,7 +72,7 @@ export function mdLinks(path, options) {
       const totalBroken = statsBroken(theSameLinks);
       resolve({
         total: totalLinks,
-        unique: totalstats,
+        total: totalstats,
         broken: totalBroken,
       });
     }

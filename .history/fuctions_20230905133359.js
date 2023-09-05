@@ -130,23 +130,11 @@ export function validateLinks(link) {
 }
 
 //Estadisticas de los links
-/*
 export function statsLinks(arrayTheSameLinks) {
   //arreglo de objetos que representan enlaces.
   const setUniques = new Set(); //es una estructura de datos en JavaScript que solo permite almacenar valores únicos, lo que significa que no puede haber duplicados en él.
-  // Esto tiene el efecto de almacenar solo las URLs únicas en setUniques.
-  arrayTheSameLinks.forEach((item) => setUniques.add(item.href));
-  return setUniques.length;
-}*/
-export function statsLinks(arrayTheSameLinks) {
-  const uniqueLinks = [];
-  arrayTheSameLinks.forEach((item) => {
-    if (!uniqueLinks.includes(item.href)) {
-      uniqueLinks.push(item.href);
-    }
-  });
-  const totalUnique = uniqueLinks.length;
-  return totalUnique;
+  arrayTheSameLinks.forEach((item) => setUniques.add(item.href)); // Esto tiene el efecto de almacenar solo las URLs únicas en setUniques.
+  return { total: arrayTheSameLinks.length, unique: setUniques.size };
 }
 
 export function statsBroken(arrayTheSameLinks) {
@@ -159,7 +147,6 @@ export function statsBroken(arrayTheSameLinks) {
   }
 }
 
-export function fusionStats(arrayTheSameLinks) {
-  const nCountLinks = arrayTheSameLinks.length;
-  return nCountLinks;
+export function fusionStats(arrayTheSameLinks){
+  
 }
