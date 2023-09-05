@@ -14,7 +14,6 @@ import {
   validateLinks,
   statsLinks,
   statsBroken,
-  fusionStats,
 } from "./fuctions.js";
 
 export function mdLinks(path, options) {
@@ -54,28 +53,63 @@ export function mdLinks(path, options) {
         .catch((errors) => {
           console.log("errors");
         });
-    } else if (options.validate === false && options.stats === false) {
-      theSameLinks.forEach((element) => {
-        console.log(element);
-      });
-    } else if (options.validate === false && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
-      const totalstats = statsLinks(theSameLinks);
-
-      resolve({
-        total: totalLinks,
-        unique: totalstats,
-      });
-    } else if (options.validate === true && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
-      const totalstats = statsLinks(theSameLinks);
-      const totalBroken = statsBroken(theSameLinks);
-      resolve({
-        total: totalLinks,
-        unique: totalstats,
-        broken: totalBroken,
+    }
+    else if (options.validate === false && options.stats === false) {
+       theSameLinks.forEach((element) => {
+        console.log(element)
       });
     }
+    else if (options.validate === false && options.stats === true) {
+      theSameLinks.forEach((element) => {
+       console.log(element)
+     });
+   }
+
+
+
+/*
+    //En otras palabras, verifica si ambas propiedades son false.
+    if 
+      resolve(arrayPromes);
+    }
+    if (options.validate === true && options.stats === true) {
+      resolve(statsBroken(theSameLinks));
+    }
+    else if (options.validate === true && options.stats === true) {
+      const unique = 
+      resolve({
+
+
+      }) 
+        
+        (statsLinks(theSameLinks));
+    }
+    /* 
+    if (options.validate === false && options.stats === true) {
+      resolve(stats(arrayPromes));
+    }
+   
+        .then((response) => resolve(statsValidate(response)));
+    }
+    } else if (options.validate === false && options.stats === true) {
+      console.log("probando----");
+    } else {
+      theSameLinks.forEach((element) => {
+        arrayPromes.push(validateLinks(element));
+      });
+      Promise.all(arrayPromes)
+        .then((resposes) => {
+          resolve(resposes.links);
+        })
+        .catch((errors) => {
+          console.log("errors");
+        
+    
+
+
+
+
+*/
   });
 }
 
@@ -83,8 +117,8 @@ export function mdLinks(path, options) {
 //links para función de links
 
 mdLinks("./README.md", {
-  validate: true,
-  stats: true,
+  validate: false,
+  stats: false,
 }).then((links) => {
   console.log("keeping promise!", links);
 });

@@ -130,6 +130,21 @@ export function validateLinks(link) {
 }
 
 //Estadisticas de los links
+export function statsLinks(arrayTheSameLinks) {
+  const uniqueLinks = [];
+
+  arrayTheSameLinks.forEach((item) => {
+    if (!uniqueLinks.includes(item.href)) {
+      uniqueLinks.push(item.href);
+    }
+  });
+
+  // const totalLinks = urls.length;
+  const totalUnique = uniqueLinks.length;
+
+  return totalUnique;
+}
+
 /*
 export function statsLinks(arrayTheSameLinks) {
   //arreglo de objetos que representan enlaces.
@@ -138,16 +153,6 @@ export function statsLinks(arrayTheSameLinks) {
   arrayTheSameLinks.forEach((item) => setUniques.add(item.href));
   return setUniques.length;
 }*/
-export function statsLinks(arrayTheSameLinks) {
-  const uniqueLinks = [];
-  arrayTheSameLinks.forEach((item) => {
-    if (!uniqueLinks.includes(item.href)) {
-      uniqueLinks.push(item.href);
-    }
-  });
-  const totalUnique = uniqueLinks.length;
-  return totalUnique;
-}
 
 export function statsBroken(arrayTheSameLinks) {
   let count = 0;

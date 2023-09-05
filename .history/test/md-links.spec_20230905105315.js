@@ -101,3 +101,13 @@ describe('fileToStringArray', () => {
   });
 });
 
+/*
+describe('fileToStringArray', () => {
+  it('deberia ser una funcion', () => {
+    expect(typeof fileToStringArray).toBe('function');
+  });
+  it('debe proporcionar un array de objetos (aux3) que incluyan ruta así como contenido', async () => {
+    expect(fileToStringArray(aux3)).toStrictEqual(rutaYContenido)
+
+  });
+})*/

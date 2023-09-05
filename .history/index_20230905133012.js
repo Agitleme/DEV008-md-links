@@ -14,7 +14,6 @@ import {
   validateLinks,
   statsLinks,
   statsBroken,
-  fusionStats,
 } from "./fuctions.js";
 
 export function mdLinks(path, options) {
@@ -59,20 +58,12 @@ export function mdLinks(path, options) {
         console.log(element);
       });
     } else if (options.validate === false && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
-      const totalstats = statsLinks(theSameLinks);
-
-      resolve({
-        total: totalLinks,
-        unique: totalstats,
-      });
+      resolve(statsLinks(theSameLinks));
     } else if (options.validate === true && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
       const totalstats = statsLinks(theSameLinks);
       const totalBroken = statsBroken(theSameLinks);
       resolve({
-        total: totalLinks,
-        unique: totalstats,
+        total: totalstats,
         broken: totalBroken,
       });
     }

@@ -140,12 +140,15 @@ export function statsLinks(arrayTheSameLinks) {
 }*/
 export function statsLinks(arrayTheSameLinks) {
   const uniqueLinks = [];
+
   arrayTheSameLinks.forEach((item) => {
     if (!uniqueLinks.includes(item.href)) {
       uniqueLinks.push(item.href);
     }
   });
+
   const totalUnique = uniqueLinks.length;
+
   return totalUnique;
 }
 

@@ -14,7 +14,6 @@ import {
   validateLinks,
   statsLinks,
   statsBroken,
-  fusionStats,
 } from "./fuctions.js";
 
 export function mdLinks(path, options) {
@@ -54,37 +53,28 @@ export function mdLinks(path, options) {
         .catch((errors) => {
           console.log("errors");
         });
-    } else if (options.validate === false && options.stats === false) {
+    }
+    else if (options.validate === false && options.stats === false) {
       theSameLinks.forEach((element) => {
-        console.log(element);
-      });
-    } else if (options.validate === false && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
-      const totalstats = statsLinks(theSameLinks);
-
-      resolve({
-        total: totalLinks,
-        unique: totalstats,
-      });
-    } else if (options.validate === true && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
-      const totalstats = statsLinks(theSameLinks);
-      const totalBroken = statsBroken(theSameLinks);
-      resolve({
-        total: totalLinks,
-        unique: totalstats,
-        broken: totalBroken,
+      console.log(element)
       });
     }
-  });
-}
+    else if (options.validate === false && options.stats === true) {
+      resolve(statsLinks(theSameLinks))
+
+     }
+
+   }
+
+  )};
+
 
 // Consumir la promesa
 //links para función de links
 
 mdLinks("./README.md", {
-  validate: true,
-  stats: true,
+  validate: false,
+  stats: false,
 }).then((links) => {
   console.log("keeping promise!", links);
 });

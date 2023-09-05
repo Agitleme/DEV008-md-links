@@ -12,9 +12,6 @@ import {
   fileToStringArray,
   linkFinder,
   validateLinks,
-  statsLinks,
-  statsBroken,
-  fusionStats,
 } from "./fuctions.js";
 
 export function mdLinks(path, options) {
@@ -40,10 +37,11 @@ export function mdLinks(path, options) {
     let contentMD = fileToStringArray(mdFiltro);
 
     const theSameLinks = linkFinder(contentMD);
+   //resolve(theSameLinks);
 
     //constante donde vamos a gusradar las promesa
     const arrayPromes = [];
-    if (options.validate === true && options.stats === false) {
+    if (options.validate === true) {
       theSameLinks.forEach((element) => {
         arrayPromes.push(validateLinks(element));
       });
@@ -51,40 +49,26 @@ export function mdLinks(path, options) {
         .then((resposes) => {
           resolve(resposes);
         })
+        .catch((error) => {
+          console.log("error");
+        });
+    } else {
+      theSameLinks.forEach((element) => {
+        arrayPromes.push(validateLinks(element));
+      });
+      Promise.all(arrayPromes)
+        .then((resposes) => {
+          resolve(resposes.links);
+        })
         .catch((errors) => {
           console.log("errors");
         });
-    } else if (options.validate === false && options.stats === false) {
-      theSameLinks.forEach((element) => {
-        console.log(element);
-      });
-    } else if (options.validate === false && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
-      const totalstats = statsLinks(theSameLinks);
-
-      resolve({
-        total: totalLinks,
-        unique: totalstats,
-      });
-    } else if (options.validate === true && options.stats === true) {
-      const totalLinks = fusionStats(theSameLinks);
-      const totalstats = statsLinks(theSameLinks);
-      const totalBroken = statsBroken(theSameLinks);
-      resolve({
-        total: totalLinks,
-        unique: totalstats,
-        broken: totalBroken,
-      });
     }
   });
 }
 
 // Consumir la promesa
 //links para función de links
-
-mdLinks("./README.md", {
-  validate: true,
-  stats: true,
-}).then((links) => {
-  console.log("keeping promise!", links);
+mdLinks("./testFile", { validate: true }).then((links) => {
+  console.log("keeping promise", links);
 });

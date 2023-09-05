@@ -1,6 +1,6 @@
 import path from "path";
 //import chalk from "chalk";
-import fs, { link } from "fs";
+import fs from "fs";
 import { log } from "console";
 //import { pathToFileURL } from "url";
 /* aqui van todas la funciones, validad una ruta, path a absuluto abiri con console log "node espacio y nombre del archivo"
@@ -110,6 +110,7 @@ export function linkFinder(stringObject) {
 }
 
 export function validateLinks(link) {
+  //La función map se utiliza para iterar sobre cada elemento del arreglo links.
   //En este caso, link es una variable que representa cada elemento (enlace) en el arreglo.
   return (
     fetch(link.href)
@@ -129,37 +130,12 @@ export function validateLinks(link) {
   );
 }
 
-//Estadisticas de los links
-/*
-export function statsLinks(arrayTheSameLinks) {
+export function statusLinks(arrayTheSameLinks) {
+  
   //arreglo de objetos que representan enlaces.
-  const setUniques = new Set(); //es una estructura de datos en JavaScript que solo permite almacenar valores únicos, lo que significa que no puede haber duplicados en él.
-  // Esto tiene el efecto de almacenar solo las URLs únicas en setUniques.
-  arrayTheSameLinks.forEach((item) => setUniques.add(item.href));
-  return setUniques.length;
-}*/
-export function statsLinks(arrayTheSameLinks) {
-  const uniqueLinks = [];
-  arrayTheSameLinks.forEach((item) => {
-    if (!uniqueLinks.includes(item.href)) {
-      uniqueLinks.push(item.href);
-    }
-  });
-  const totalUnique = uniqueLinks.length;
-  return totalUnique;
+    const setUniques = new Set(); //es una estructura de datos en JavaScript que solo permite almacenar valores únicos, lo que significa que no puede haber duplicados en él.
+  arrayTheSameLinks.forEach(item => setUniques.add(item.href)); // Esto tiene el efecto de almacenar solo las URLs únicas en setUniques.
+  //console.log(arrayTheSameLinks, "Estastus Links")
+  return { total: arrayTheSameLinks.length, unique: setUniques.size }
 }
-
-export function statsBroken(arrayTheSameLinks) {
-  let count = 0;
-  for (const link of arrayTheSameLinks) {
-    if (link.ok !== "ok") {
-      count++;
-    }
-    return count;
-  }
-}
-
-export function fusionStats(arrayTheSameLinks) {
-  const nCountLinks = arrayTheSameLinks.length;
-  return nCountLinks;
-}
+statusLinks['./README.md']
