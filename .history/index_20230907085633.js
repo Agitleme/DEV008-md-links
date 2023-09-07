@@ -67,7 +67,7 @@ export function mdLinks(path, options) {
         total: totalLinks,
         unique: totalstats,
       });
-
+      
     } else if (options.validate === true && options.stats === true) {
       const totalLinks = fusionStats(theSameLinks);
       const totalstats = statsLinks(theSameLinks);
@@ -83,10 +83,10 @@ export function mdLinks(path, options) {
 
 // Consumir la promesa
 //links para función de links
-/*
+
 mdLinks("./README.md", {
   validate: true,
   stats: true,
 }).then((links) => {
   console.log("keeping promise!", links);
-});*/
+});

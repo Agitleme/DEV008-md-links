@@ -1,4 +1,4 @@
-import {mdLinks} from "./index.js"
+import mdLinks from "./index"
 
 const [, , ...args] = process.argv
 console.log(args)
