@@ -1,16 +1,14 @@
-import {mdLinks} from "./index.js"
+import mdLinks from "./index"
 
 const [, , ...args] = process.argv
-console.log(args)
-const route = args[0];
+const route = args[1];
 const validate = args.includes('--validate');
 const stats = args.includes('--stats');
 const option = { validate, stats };
 
 mdLinks(route, option)
-.then((result)=>{
+.then(()=>{
 //si options es = =  a validate
-console.log(result)
 })
 .catch((error)=>{
     console.log(error)
